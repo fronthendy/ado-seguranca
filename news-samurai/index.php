@@ -1,11 +1,10 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-	<title>News - Samurai</title>
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<meta charset="UTF-8">
-
+	<title>News - Samurai</title>
 </head>
 <body>
 	<div class="container">
