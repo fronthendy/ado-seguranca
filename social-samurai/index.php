@@ -14,7 +14,16 @@
 
 		<div class="col-sm-5">
 			<img src="photo.jpg" class="img-responsive">
-			<a href="#" class="like"><img src="icon.ico" class="icon"> curtir</a>
+			<?php
+				require('connect.php');
+
+				$sql = "SELECT * FROM likes";
+				$result = $conn->query($sql);    	
+			?>	
+				<a href="#" class="like"><img src="icon.ico" class="icon"> <?php echo $result->num_rows ?></a>
+	    	<?php
+	    		$conn->close();
+			?>
 		</div>
 		<div class="col-sm-7">
 			<h2>John Doe</h2>
