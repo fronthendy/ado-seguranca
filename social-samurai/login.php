@@ -5,35 +5,53 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Seu banco</title>
-	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta charset="utf-8">
+	<title>Social - Login</title>
 </head>
 <body>
-<h1>Seu banco. Um banco todo seu!</h1>
-<p>Logando ...</p>
+	<div class="container social">
+		<div class="col-xs-12">
+			<img src="social-logo.png" class="logo" alt="News">
+		</div>
+		<div class="col-xs-12">
+			<?php 
+				if(isset($_GET['message']))
+					echo "<h5 class='text-center'>Ops, você precisa estar logado para curtir a foto!</h5>";
+			?>
+		</div>
+		<form class="login" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+			Usuário: <input type="text" name="username" class="form-control"/>
+			Senha: <input type="password" name="password" class="form-control"/>
+			<input class="btn btn-default" type="button" value="Voltar" onClick="document.location.href='actions.php'" />
+			<input  class="btn btn-primary" type="submit" name="submit" value="Entrar"/>
+		</form>
 
-<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-	Usuário: <input type="text" name="username"/>
-	Senha  : <input type="password" name="password"/>
-	<input type="submit" name="submit" value="Entrar"/>
-</form>
+		<?php
+		require('connect.php');
 
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	//if the session is registered to a valid user then allow update
-	if (!strcmp($_POST['username'],'admin') && !strcmp($_POST['password'],'pipoca')) {
-		$_SESSION['username'] = $_POST['username'];
-		$_SESSION['logged'] = 5;
-		echo "Login bem sucedido!<br />";
-	} else {
-		$_SESSION['logged'] = 2;
-		echo "Login mal sucedido!<br />";
-	}
-}
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			if(isset($_POST['username']) && isset($_POST['password'])){
+				$user = $_POST["username"];
+				$pass = $_POST["password"];
+				$sql = "SELECT * FROM usuarios WHERE nome_usuario='".$user."' AND senha='". $pass. "'";
+				$result = $conn->query($sql);
+				if($result->num_rows > 0){
+					echo "Login realizado com sucesso";
+					 while($row = $result->fetch_assoc()) {
+						$_SESSION["userID"] = $row["id_usuario"];
+						$_SESSION["nome_usuario"] = $row["nome_usuario"];
+					}
+				}else{
+					echo "usuario e/ou senha invalido";
+				}
+			}
+		}
 
-?>
+		?>
 
-<input type="button" value="Voltar" onClick="document.location.href='profile.php'" />
-
+		
+	</div>
 </body>
 </html>

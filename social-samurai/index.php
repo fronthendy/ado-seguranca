@@ -7,11 +7,22 @@
 	<title>Social - Samurai</title>
 </head>
 <body>
+<?php session_start() ?>
 	<div class="container social">
-		<div class="col-xs-12">
-			<img src="social-logo.png" class="logo" alt="News">
+		<div class="row">
+			<div class="col-sm-6">
+				<img src="social-logo.png" class="logo" alt="News">
+			</div>
+			<div class="col-sm-6 ">
+				<?php 
+					if(isset($_SESSION['nome_usuario'])){
+				?>
+					<p class="text-right">Olá, <?php echo  $_SESSION["nome_usuario"] ?> | <a href="logout.php">Logout</a></p>
+				<?php 
+					}
+				?>
+			</div>
 		</div>
-
 		<div class="col-sm-5">
 			<img src="photo.jpg" class="img-responsive">
 			<?php
@@ -20,7 +31,10 @@
 				$sql = "SELECT * FROM likes";
 				$result = $conn->query($sql);    	
 			?>	
-				<a href="#" class="like"><img src="icon.ico" class="icon"> <?php echo $result->num_rows ?></a>
+				<form action="actions.php" method="POST">
+					<input type="hidden" name="userID" value="<?php echo(isset($_SESSION['userID'])) ?>">
+					<button type="submit" name="like" class="like"><img src="icon.ico" class="icon"> <?php echo $result->num_rows ?></button>
+				</form>
 	    	<?php
 	    		$conn->close();
 			?>
