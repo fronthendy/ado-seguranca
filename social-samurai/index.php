@@ -19,6 +19,10 @@
 				?>
 					<p class="text-right">Olá, <?php echo  $_SESSION["nome_usuario"] ?> | <a href="logout.php">Logout</a></p>
 				<?php 
+					}else{
+				?>
+				<p class="text-right"><a href="login.php">Login</a></p>
+				<?php
 					}
 				?>
 			</div>

@@ -22,10 +22,11 @@ session_start();
 			?>
 		</div>
 		<form class="login" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			Usuário: <input type="text" name="username" class="form-control"/>
-			Senha: <input type="password" name="password" class="form-control"/>
-			<input class="btn btn-default" type="button" value="Voltar" onClick="document.location.href='actions.php'" />
-			<input  class="btn btn-primary" type="submit" name="submit" value="Entrar"/>
+			<div class="form-group">
+				Usuário <input type="text" name="username" class="form-control"/>
+				Senha <input type="password" name="password" class="form-control"/>
+			</div>
+			<input  class="btn btn-primary pull-right" type="submit" name="submit" value="Entrar"/>
 		</form>
 
 		<?php
@@ -43,6 +44,8 @@ session_start();
 						$_SESSION["userID"] = $row["id_usuario"];
 						$_SESSION["nome_usuario"] = $row["nome_usuario"];
 					}
+	 				header("Location: index.php");
+					
 				}else{
 					echo "usuario e/ou senha invalido";
 				}
