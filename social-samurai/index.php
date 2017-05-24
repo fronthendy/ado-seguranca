@@ -36,7 +36,8 @@
 				$result = $conn->query($sql);    	
 			?>	
 				<form action="actions.php" method="POST">
-					<input type="hidden" name="userID" value="<?php echo(isset($_SESSION['userID'])) ?>">
+					<input type="hidden" name="userID" value="<?php echo($_SESSION['userID']) ?>">
+					<input type="hidden" name="token" value="<?php echo($_SESSION['token']) ?>">
 					<button type="submit" name="like" class="like"><img src="icon.ico" class="icon"> <?php echo $result->num_rows ?></button>
 				</form>
 	    	<?php

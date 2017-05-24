@@ -43,6 +43,7 @@ session_start();
 					 while($row = $result->fetch_assoc()) {
 						$_SESSION["userID"] = $row["id_usuario"];
 						$_SESSION["nome_usuario"] = $row["nome_usuario"];
+						$_SESSION["token"] = rand(100,1000);
 					}
 	 				header("Location: index.php");
 					

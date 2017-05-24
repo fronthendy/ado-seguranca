@@ -21,7 +21,7 @@ header('location:index.php');
 Ataque na rede social
 <script>
 $.ajax({
-	url: "http://localhost/ado-seguranca/social-samurai/actions.php",
+	url: "http://localhost/ado-samurai/social-samurai/actions.php",
 	method: "POST",
 	data: {		
 		userID: 1,
